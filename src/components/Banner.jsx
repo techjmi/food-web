@@ -4,7 +4,7 @@ import { Button } from "flowbite-react";
 const Banner = () => {
   return (
     <div
-      className="min-h-80 bg-cover bg-center md:w-4/5 mx-auto p-5 flex flex-col justify-between items-center mt-2"
+      className="min-h-80 bg-cover bg-center md:w-4/5 mx-auto p-5 flex flex-col sm:w-full rounded-lg justify-between items-center mt-2"
       style={{
         backgroundImage: `url(${bannerImage})`,
         backgroundRepeat: "no-repeat",
@@ -16,7 +16,7 @@ const Banner = () => {
           <h1 className="text-white text-3xl font-bold text-center">
             Welcome to Our Site
           </h1>
-          <p className="text-white text-justify">
+          <p className="text-white text-justify sm:text-sm">
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente
             hic veritatis possimus, est tenetur quod perspiciatis atque incidunt
             expedita dicta nobis alias ab beatae cum reprehenderit nostrum nisi

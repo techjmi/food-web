@@ -1,12 +1,46 @@
-import { Button } from "flowbite-react";
-import React, { useState } from "react";
+import React, { useContext, useEffect } from "react";
 import {
-  AiOutlineSearch,
   AiFillPlusCircle,
   AiFillMinusCircle,
 } from "react-icons/ai";
+import { DataContext } from "../context/Dataprovider";
+
 const Foodlist = ({ _id, name, image, price, description, category }) => {
-  const [addItem, setAddItem] = useState(0);
+  const { addTocart, setAddTocart } = useContext(DataContext);
+
+  const addCart = (itemId) => {
+    if (!addTocart[itemId]) {
+      // Item does not exist in cart, add it with quantity 1
+      setAddTocart((prevState) => ({
+        ...prevState,
+        [itemId]: 1,
+      }));
+    } else {
+      // Item already exists in cart, increment its quantity
+      setAddTocart((prevState) => ({
+        ...prevState,
+        [itemId]: prevState[itemId] + 1,
+      }));
+    }
+  };
+
+  const removeCart = (itemId) => {
+    if (addTocart[itemId] === 1) {
+      // If only one item, remove it from cart
+      const updatedCart = { ...addTocart };
+      delete updatedCart[itemId];
+      setAddTocart(updatedCart);
+    } else if (addTocart[itemId] > 1) {
+      // Decrease quantity if more than one
+      setAddTocart((prevState) => ({
+        ...prevState,
+        [itemId]: prevState[itemId] - 1,
+      }));
+    }
+  };
+useEffect(()=>{
+    console.log(addTocart)
+},)
   return (
     <div className="flex flex-col mx-2 my-4 shadow-sm rounded-lg relative">
       <img
@@ -14,26 +48,26 @@ const Foodlist = ({ _id, name, image, price, description, category }) => {
         alt={name}
         className="object-cover rounded-lg cursor-pointer hover:scale-95 transition-transform duration-200"
       />
-      <div className="add absolute bottom-40 right-3">
-        {!addItem ? (
+      <div className="add absolute bottom-3 right-3">
+        {!addTocart[_id] ? (
           <button
             className="text-black font-extrabold text-2xl m-0 p-0"
-            onClick={() => setAddItem((prev) => prev + 1)}
+            onClick={() => addCart(_id)}
           >
             <AiFillPlusCircle />
           </button>
         ) : (
-          <div className="inc flex flex-row justify-between">
+          <div className="inc flex flex-row justify-between rounded-xl bg-slate-300 px-2 py-1">
             <button
               className="text-black font-extrabold text-2xl m-0 p-0 mx-1"
-              onClick={() => setAddItem((prev) => prev - 1)}
+              onClick={() => removeCart(_id)}
             >
               <AiFillMinusCircle />
             </button>
-            <h2>{addItem}</h2>
+            <h2>{addTocart[_id]}</h2>
             <button
               className="text-black font-extrabold text-2xl m-0 p-0"
-              onClick={() => setAddItem((prev) => prev + 1)}
+              onClick={() => addCart(_id)}
             >
               <AiFillPlusCircle />
             </button>

@@ -6,10 +6,11 @@ export const DataContext = createContext(null);
 
 const Dataprovider = ({ children }) => {
   const [food, setFood] = useState(food_list);
+  const[addTocart, setAddTocart]= useState({})
 
   return (
     <div>
-      <DataContext.Provider value={{ food, setFood }}>
+      <DataContext.Provider value={{ food, setFood,addTocart, setAddTocart }}>
         {children}
       </DataContext.Provider>
     </div>
