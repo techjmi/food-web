@@ -36,12 +36,12 @@ const handleSubmit=()=>{
           size='small'
         />
       </form>
-      <Button className="w-12 h-10 lg:hidden" color="gray" pill>
+      <Button className="w-12 h-10 lg:hidden sm:hidden" color="gray" pill>
         <AiOutlineSearch />
       </Button>
       <div className="flex gap-2 md:order-2">
         <Button
-          className="md:w-12 md:h-10 sm:inline sm:h-5"
+          className="md:w-12 md:h-10 hidden lg:inline"
           color="gray"
           pill
           // onClick={() => dispatch(toggleTheme())}
