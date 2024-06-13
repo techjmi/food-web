@@ -11,7 +11,7 @@ const DisplayFood = ({ category }) => {
     // Simulating a delay for loading spinner effect
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 10000); // Adjust delay time as needed
+    }, 2000); // Adjust delay time as needed
 
     return () => clearTimeout(timer); // Clean up timeout on unmount
   }, []);
