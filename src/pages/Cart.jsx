@@ -2,10 +2,11 @@ import React, { useContext } from "react";
 import { DataContext } from "../context/Dataprovider";
 import BtnGroup from "../components/BtnGroup";
 import { Button } from "flowbite-react";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { addTocart, food, setAddTocart } = useContext(DataContext);
-
+const navigate = useNavigate()
   const itemCount = Object.keys(addTocart).length;
 
   // Function to calculate the total price
@@ -59,10 +60,13 @@ const Cart = () => {
       }));
     }
   };
-
+// handle navigate function
+const handleNavigate=()=>{
+  navigate('/placeorder')
+}
   return (
     <div className="md:px-28 w-full flex flex-col md:flex-row pb-2 px-2">
-      <div className="left w-full md:w-[70%] overflow-y-scroll md:max-h-[85vh] no-scrollbar">
+      <div className="left w-full md:w-[70%] overflow-y-scroll md:max-h-[85vh] no-scrollbar border-r">
         <p className="border-b rounded-md py-2">My Cart &nbsp;({itemCount})</p>
         {food.map((item) => {
           if (addTocart[item._id] > 0) {
@@ -99,7 +103,8 @@ const Cart = () => {
           return null;
         })}
       </div>
-      <div className="right bg-slate-500 md:w-[30%] z-50 shadow-lg rounded-lg relative overflow-y-auto h-60">
+    {/* price details */}
+      <div className="right bg-slate-500 md:w-[30%] z-50 shadow-lg rounded-lg relative overflow-y-auto h-60 md:h-80">
         <p className="text-white border-b py-2 text-center">PRICE DETAILS</p>
         <div className="price ms-3 text-blue-50 mt-1">
           <div className="total flex justify-between me-2 border-b py-2">
@@ -123,7 +128,7 @@ const Cart = () => {
               applicablePrice + 50
             ).toFixed(2)}`}</p>
           </div>
-          <button className="outline bg-white px-3 py-2 mt-1 absolute bottom-2 w-[92%] mx-auto rounded-lg text-black">
+          <button className="outline bg-white px-3 py-2 mt-1 absolute bottom-2 w-[92%] mx-auto rounded-lg text-black" onClick={handleNavigate}>
             PLACE ORDER
           </button>
         </div>
