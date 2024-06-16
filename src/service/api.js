@@ -1,6 +1,6 @@
 import axios from 'axios'
-const urlfood='http://localhost:4000/api/food'
-const userURl="http://localhost:4000/api/user"
+const urlfood='https://food-backend-5zo6.onrender.com/api/food'
+const userURl="https://food-backend-5zo6.onrender.com/api/user"
 //post food data code
 export const PostFood=async(data)=>{
 try {
