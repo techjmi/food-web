@@ -42,9 +42,9 @@ const handleSubmit=()=>{
           size='small'
         />
       </form>
-      <Button className="w-12 h-10  hidden lg:inline" color="gray" pill>
+      {/* <Button className="w-12 h-10  hidden lg:inline" color="gray" pill>
         <AiOutlineSearch />
-      </Button>
+      </Button> */}
       <Link to="/cart" className="cursor-pointer">
       <Badge badgeContent={itemCount} color="secondary">
         <BsCart3 className='size-8 sm:size-6 cursor-pointer' />
@@ -52,14 +52,14 @@ const handleSubmit=()=>{
     </Link>
       
       <div className="flex gap-2 md:order-2">
-        <Button
+        {/* <Button
           className="md:w-12 md:h-10 hidden lg:inline"
           color="gray"
           pill
-          // onClick={() => dispatch(toggleTheme())}
+          onClick={() => dispatch(toggleTheme())}
         >
-          {/* {theme === "light" ? <MdOutlineLightMode /> : <MdDarkMode />} */}
-        </Button>
+          {theme === "light" ? <MdOutlineLightMode /> : <MdDarkMode />}
+        </Button> */}
         <UserProfile />
         <Navbar.Toggle />
       </div>

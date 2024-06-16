@@ -1,5 +1,5 @@
 //sidebar of dashbaord.... left side of dashboard.jsx and showing all option
-import React from "react";
+import React, { useContext } from "react";
 import { MdDashboard } from "react-icons/md";
 import { CiBoxList } from "react-icons/ci";
 import { IoMdAdd } from "react-icons/io";
@@ -11,7 +11,9 @@ import {
 } from "react-icons/hi";
 import { Sidebar } from "flowbite-react";
 import { Link } from "react-router-dom";
+import { DataContext } from "../context/Dataprovider";
 const DashboardSide = () => {
+  const{currentUser} =useContext(DataContext)
   return (
     <Sidebar className="w-full md:w-56">
       <Sidebar.Items>
