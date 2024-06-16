@@ -33,7 +33,7 @@ const PlaceOrder = () => {
   return (
     <>
       <div className="main w-full px-2 md:px-28 flex md:flex-row flex-col md:pt-8 mt-2 justify-between">
-        <div className="left md:w-1/2 border-r w-full rounded-lg shadow-md md:pb-12 px-2 pb-2">
+        <div className="left md:w-1/2 border-r rounded-lg shadow-md md:pb-12 px-2 pb-2">
           <p className="text-center font-semibold text-black mb-2">
             Delivery Information
           </p>

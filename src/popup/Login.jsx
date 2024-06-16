@@ -3,7 +3,7 @@ import SignUp from './SignUp';
 import { RxCross2 } from "react-icons/rx";
 import { Button } from 'flowbite-react';
 
-const Login = ({ onClose }) => {
+const Login = ({ onClose,onCancel  }) => {
     const [showSignup, setShowSignup] = useState(false);
     const [currState, setCurrState] = useState('login');
 
@@ -16,11 +16,10 @@ const Login = ({ onClose }) => {
         setCurrState('login');
         setShowSignup(false);
     }
-
     return (
         <div className='inset-0 flex items-center justify-center bg-opacity-50 z-40 fixed'>
             <div className="w-[95%] max-w-md bg-white pb-8 pt-2 rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            <RxCross2 className='float-right mt-4 me-4 font-extrabold cursor-pointer size-6' onClick={onClose}/>
+            <RxCross2 className='float-right mt-4 me-4 font-extrabold cursor-pointer size-6' onClick={onCancel}/>
                 <div className="space-y-2 md:space-y-3 sm:p-4">
                     {currState === 'login' ? (
                         <>
