@@ -8,12 +8,8 @@ import { Link } from 'react-router-dom';
 const url = "https://ideogram.ai/assets/image/balanced/response/ihXk-5JzQFK11aI5Ri_r4A";
 
 const UserProfile = () => {
-  // const [currentUser, setCurrentUser] = useState(false); 
   const{currentUser}= useContext(DataContext)
   const [showLogin, setShowLogin] = useState(false);
-// console.log(currentUser.isAdmin)
-// const isAdminUser = currentUser.isAdmin;
-// console.log(isAdminUser)
   const handleLogin = () => {
     setShowLogin(true);
   }
@@ -21,14 +17,17 @@ const UserProfile = () => {
   const handleCloseLogin = () => {
     setShowLogin(false);
   }
-
+//handle signout function
+const handleSignout=()=>{
+  localStorage.removeItem('food_token')
+}
   return (
     <div>
       {currentUser ? (
         <Dropdown
           arrowIcon={false}
           inline
-          label={<Avatar alt='user' img={currentUser.image} rounded />}
+          label={<Avatar alt='user' img={currentUser.profilePic} rounded />}
         >
           <Dropdown.Header>
             <span className='block text-sm'>{currentUser.name}</span>
@@ -38,6 +37,8 @@ const UserProfile = () => {
           <Link to={'/dashboard?tab=profile'}>
               <Dropdown.Item>Profile</Dropdown.Item>
             </Link>
+            <Dropdown.Divider />
+             <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
         </Dropdown>
       ) : (
         <>

@@ -38,9 +38,9 @@ const Foodlist = ({ _id, name, image, price, description, category }) => {
       }));
     }
   };
-useEffect(()=>{
-    console.log(addTocart)
-},)
+// useEffect(()=>{
+//     console.log(addTocart)
+// },)
   return (
     <div className="flex flex-col mx-2 my-4 shadow-sm rounded-lg relative">
       <img

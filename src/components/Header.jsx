@@ -13,7 +13,6 @@ const Header = () => {
   const[searchTerm,setSearchTerm]=useState('')
   const[login,setLogin]= useState(false)
   const{addTocart}= useContext(DataContext)
-  console.log('the cartsss',addTocart)
   const itemCount = Object.keys(addTocart).length;
 //serach text function
 const handleSubmit=()=>{

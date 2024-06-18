@@ -13,10 +13,10 @@ const Dataprovider = ({ children }) => {
   const fetchUser = async () => {
     try {
       const token = localStorage.getItem("food_token");
-      console.log(token);
+      // console.log(token);
       if (token) {
         const userDetails = await getUserInfo(token);
-        console.log(userDetails);
+        // console.log(userDetails);
         setCurrentUser(userDetails);
       }
     } catch (error) {

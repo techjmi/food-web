@@ -35,7 +35,7 @@ const DashboardAdd = () => {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(`Upload is ${progress}% done`);
+          // console.log(`Upload is ${progress}% done`);
           setUploadProgress(progress);
         },
         (error) => {
@@ -45,7 +45,7 @@ const DashboardAdd = () => {
         async () => {
           try {
             const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-            console.log("File available at", downloadURL);
+            // console.log("File available at", downloadURL);
 
             // Set download URL to formData
             // setFormData({ ...formData, image: downloadURL });
@@ -90,7 +90,7 @@ const DashboardAdd = () => {
       const imageUrl = await handleUpload();
       //   Then submit food data with image URL
       const foodData = { ...formData, image: imageUrl };
-      console.log("datata", foodData);
+      // console.log("datata", foodData);
       await PostFood(foodData);
       // Clear form after submission
       setFormData({

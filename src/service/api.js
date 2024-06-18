@@ -11,6 +11,16 @@ try {
     console.log('The error While posting the food is', error.message)
 }
 }
+//user signup code
+export const Signup=async(data)=>{
+    try {
+        const response= axios.post(`${userURl}/signup`,data)
+        return response
+    } catch (error) {
+        console.log('The error While Signup is', error.message)
+    }
+   
+}
 //user login code
 export const LoginUser=async(data)=>{
     try {
@@ -23,15 +33,15 @@ export const LoginUser=async(data)=>{
     }
     //get user based on token system
     export const getUserInfo= async(token)=>{
-        console.log('tk', token)
-        console.log('function called')
+        // console.log('tk', token)
+        // console.log('function called')
         try {
             const response= await axios.get(`${userURl}/userinfo`,{
                 headers:{
                     Authorization: `Bearer ${token}`,
                 }
             })
-            console.log('api res', response.data)
+            // console.log('api res', response.data)
             return response.data
             
         } catch (error) {
