@@ -10,10 +10,16 @@ import {
   HiOutlineUserGroup,
 } from "react-icons/hi";
 import { Sidebar } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { DataContext } from "../context/Dataprovider";
 const DashboardSide = () => {
   const{currentUser} =useContext(DataContext)
+  const navigate= useNavigate()
+  const handleLogout= ()=>{
+    localStorage.removeItem('food_token')
+    // localStorage.removeItem('food_token')
+    navigate("/")
+  }
   return (
     <Sidebar className="w-full md:w-56">
       <Sidebar.Items>
@@ -43,7 +49,7 @@ const DashboardSide = () => {
                 User
             </Sidebar.Item>
           </Link>
-          <Link>
+          <Link onClick={handleLogout}>
             <Sidebar.Item icon={HiArrowSmRight} as="div">
                 Sign Out
             </Sidebar.Item>

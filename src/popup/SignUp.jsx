@@ -1,9 +1,10 @@
 import { Button } from "flowbite-react";
 import { useNavigate } from 'react-router-dom';
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { LoginUser, Signup } from "../service/api";
 import { storage } from "../firebase";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { DataContext } from "../context/Dataprovider";
 
 const SignUp = () => {
   const[data, setData]= useState({
@@ -15,6 +16,7 @@ const SignUp = () => {
   //image section upload image part
   const [image, setImage] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const { fetchUser } = useContext(DataContext);
   const navigate= useNavigate()
 
   // Handle image selection
@@ -97,8 +99,9 @@ const SignUp = () => {
     try {
       const imageUrl= await handleUpload()
       const singupData={...data, profilePic:imageUrl}
-      await Signup(singupData)
-      // await LoginUser()
+      const res=await Signup(singupData)
+      localStorage.setItem('food_token', res.data.token)
+      await fetchUser()
       navigate('/')
     } catch (error) {
       console.log('The error while submitting the form is', error.message)

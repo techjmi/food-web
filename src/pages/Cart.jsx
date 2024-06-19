@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { DataContext } from "../context/Dataprovider";
 import BtnGroup from "../components/BtnGroup";
-import { Button } from "flowbite-react";
 import { useNavigate } from "react-router-dom";
+import { addInCart, removeFromCart } from "../service/api";
 
 const Cart = () => {
   const { addTocart, food, setAddTocart } = useContext(DataContext);
@@ -29,37 +29,50 @@ const navigate = useNavigate()
     return finalPrice;
   };
   let applicablePrice = charge();
+  const addCart = async (itemId) => {
+    try {
+      const token = localStorage.getItem('food_token');
+  // console.log(itemId)
+      // Call API to add item to cart
+      const payload= {itemId}
+      const response = await addInCart(payload, token);
+  
+      // Update local state with the new item count
+      setAddTocart((prevState) => ({
+        ...prevState,
+        [itemId]: (prevState[itemId] || 0) + 1,
+      }));
+    } catch (error) {
+      console.error('Error adding to cart:', error.message);
+    }
+  };
+  
   //remove from cart
-  const removeCart = (itemId) => {
-    if (addTocart[itemId] === 1) {
-      // If only one item, remove it from cart
-      const updatedCart = { ...addTocart };
-      delete updatedCart[itemId];
-      setAddTocart(updatedCart);
-    } else if (addTocart[itemId] > 1) {
-      // Decrease quantity if more than one
-      setAddTocart((prevState) => ({
-        ...prevState,
-        [itemId]: prevState[itemId] - 1,
-      }));
+  const removeCart = async (itemId) => {
+    try {
+      const token = localStorage.getItem('food_token'); // Retrieve token from localStorage or wherever it's stored
+  
+      // Call API to remove item from cart
+      const payload= {itemId}
+      const response = await removeFromCart(payload, token);
+  
+      if (addTocart[itemId] === 1) {
+        // If only one item, remove it from cart
+        const updatedCart = { ...addTocart };
+        delete updatedCart[itemId];
+        setAddTocart(updatedCart);
+      } else if (addTocart[itemId] > 1) {
+        // Decrease quantity if more than one
+        setAddTocart((prevState) => ({
+          ...prevState,
+          [itemId]: prevState[itemId] - 1,
+        }));
+      }
+    } catch (error) {
+      console.error('Error removing from cart:', error.message);
     }
   };
-  //add to cart
-  const addCart = (itemId) => {
-    if (!addTocart[itemId]) {
-      // Item does not exist in cart, add it with quantity 1
-      setAddTocart((prevState) => ({
-        ...prevState,
-        [itemId]: 1,
-      }));
-    } else {
-      // Item already exists in cart, increment its quantity
-      setAddTocart((prevState) => ({
-        ...prevState,
-        [itemId]: prevState[itemId] + 1,
-      }));
-    }
-  };
+  
 // handle navigate function
 const handleNavigate=()=>{
   navigate('/placeorder')

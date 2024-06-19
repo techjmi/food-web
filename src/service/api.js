@@ -1,6 +1,10 @@
 import axios from 'axios'
 const urlfood='https://food-backend-5zo6.onrender.com/api/food'
 const userURl="https://food-backend-5zo6.onrender.com/api/user"
+const cartUrl="https://food-backend-5zo6.onrender.com/api/cart"
+// const urlfood='http://localhost:4000/api/food'
+// const userURl='http://localhost:4000/api/user'
+// const cartUrl='http://localhost:4000/api/cart'
 //post food data code
 export const PostFood=async(data)=>{
 try {
@@ -10,6 +14,16 @@ try {
 } catch (error) {
     console.log('The error While posting the food is', error.message)
 }
+}
+//get food data code from database and show it in a home page or food page
+export const getFood= async()=>{
+    try {
+        const res=await axios.get(`${urlfood}/foodlist`)
+        console.log(res)
+        return res
+    } catch (error) {
+        console.log('The error While getting the food is', error.message)
+    }
 }
 //user signup code
 export const Signup=async(data)=>{
@@ -46,5 +60,50 @@ export const LoginUser=async(data)=>{
             
         } catch (error) {
             console.log('The error While getting the user info is', error.message)
+        }
+    }
+    //cart function logic
+    //add to cart logic code
+    export const addInCart= async(itemId, token)=>{
+        try {
+            const res= await axios.post(`${cartUrl}/add`,itemId,{
+                headers:{
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+            console.log(res)
+            return res
+        } catch (error) {
+            console.log('The error While adding to the cart', error.message)
+        }
+    }
+    //remove cart item function
+    export const removeFromCart= async(itemId, token)=>{
+        console.log('removed called')
+        try {
+            const res= await axios.post(`${cartUrl}/remove`,itemId,{
+                headers:{
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+            console.log(res)
+            return res
+        } catch (error) {
+            console.log('The error While adding to the cart', error.message)
+        }
+    }
+    //getcart item code or logic
+    export const getCartData= async(token)=>{
+        try {
+            const res= await axios.get(`${cartUrl}/get`,{
+                headers:{
+                    Authorization:`Bearer ${token}`
+                }
+            })
+            console.log(res)
+            return res
+            
+        } catch (error) {
+            console.log('The error While getting the cart data is', error.message)
         }
     }

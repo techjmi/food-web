@@ -14,6 +14,7 @@ const Header = () => {
   const[login,setLogin]= useState(false)
   const{addTocart}= useContext(DataContext)
   const itemCount = Object.keys(addTocart).length;
+  // const itemCount=1
 //serach text function
 const handleSubmit=()=>{
 

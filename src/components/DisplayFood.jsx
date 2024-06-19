@@ -2,20 +2,25 @@ import React, { useContext, useState, useEffect } from 'react';
 import { DataContext } from '../context/Dataprovider';
 import Foodlist from './Foodlist';
 import { Spinner } from "flowbite-react";
+import { getFood } from '../service/api';
 
 const DisplayFood = ({ category }) => {
-  const { food } = useContext(DataContext);
+  const { food ,setFood} = useContext(DataContext);
   const [loading, setLoading] = useState(true);
+  const fetchfood= async()=>{
+    try {
+      setLoading(true)
+      const res= await getFood()
+      setFood(res.data)
+      setLoading(false)
+    } catch (error) {
+      console.log('the error while getting food is', error.message)
+    }
+  }
 
-  useEffect(() => {
-    // Simulating a delay for loading spinner effect
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000); // Adjust delay time as needed
-
-    return () => clearTimeout(timer); // Clean up timeout on unmount
-  }, []);
-
+  useEffect(()=>{
+fetchfood()
+  },[])
   return (
     <div>
       <h3 className='text-center text-lg font-semibold'>Food list - Choose your favorite food</h3>

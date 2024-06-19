@@ -3,13 +3,14 @@ import { Avatar, Button, Dropdown } from 'flowbite-react';
 import React, { useContext, useState } from 'react';
 import Login from '../popup/Login';
 import { DataContext } from '../context/Dataprovider';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const url = "https://ideogram.ai/assets/image/balanced/response/ihXk-5JzQFK11aI5Ri_r4A";
 
 const UserProfile = () => {
   const{currentUser}= useContext(DataContext)
   const [showLogin, setShowLogin] = useState(false);
+  const navigate= useNavigate()
   const handleLogin = () => {
     setShowLogin(true);
   }
@@ -20,6 +21,7 @@ const UserProfile = () => {
 //handle signout function
 const handleSignout=()=>{
   localStorage.removeItem('food_token')
+  navigate('/')
 }
   return (
     <div>
@@ -36,7 +38,7 @@ const handleSignout=()=>{
           </Dropdown.Header>
           <Link to={'/dashboard?tab=profile'}>
               <Dropdown.Item>Profile</Dropdown.Item>
-            </Link>
+            </Link> 
             <Dropdown.Divider />
              <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
         </Dropdown>

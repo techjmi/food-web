@@ -11,7 +11,7 @@ const DashboardProfile = () => {
   const { addTocart } = useContext(DataContext);
   const itemCount = Object.keys(addTocart).length;
   return (
-    <div className="flex  flex-col w-full md:w-3/5 mx-auto h-full">
+    <div className="flex  flex-col w-full md:w-3/5 mx-auto h-full pb-3">
       <div className="avtar flex flex-row md:flex-col gap-2 items-center md:shadow-[0]shadow-md md:rounded-none rounded-lg bg-slate-50 w-full p-4 md:bg-white">
         <img
           src={currentUser.profilePic}
@@ -50,7 +50,13 @@ const DashboardProfile = () => {
           </div>
         </div>
       </div>
-      <Button className="self-center mt-8" gradientDuoTone='purpleToPink' outline>Update Profle</Button>
+      <Button
+        className="self-center mt-8"
+        gradientDuoTone="purpleToPink"
+        outline
+      >
+        Update Profle
+      </Button>
     </div>
   );
 };

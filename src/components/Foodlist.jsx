@@ -4,43 +4,41 @@ import {
   AiFillMinusCircle,
 } from "react-icons/ai";
 import { DataContext } from "../context/Dataprovider";
+import { addInCart, removeFromCart } from "../service/api";
 
 const Foodlist = ({ _id, name, image, price, description, category }) => {
   const { addTocart, setAddTocart } = useContext(DataContext);
-
-  const addCart = (itemId) => {
-    if (!addTocart[itemId]) {
-      // Item does not exist in cart, add it with quantity 1
-      setAddTocart((prevState) => ({
-        ...prevState,
-        [itemId]: 1,
-      }));
-    } else {
-      // Item already exists in cart, increment its quantity
-      setAddTocart((prevState) => ({
-        ...prevState,
-        [itemId]: prevState[itemId] + 1,
-      }));
+// console.log('food', _id)
+  const addCart = async (itemId) => {
+    // console.log('add called')
+    try {
+      // const token=
+        const token = localStorage.getItem('food_token')
+        const payload={itemId}
+        await addInCart(payload, token); // Update cart in database
+        setAddTocart((prevState) => ({
+            ...prevState,
+            [itemId]: (prevState[itemId] || 0) + 1,
+        }));
+    } catch (error) {
+        console.error('Error adding to cart:', error.message);
     }
-  };
+};
 
-  const removeCart = (itemId) => {
-    if (addTocart[itemId] === 1) {
-      // If only one item, remove it from cart
-      const updatedCart = { ...addTocart };
-      delete updatedCart[itemId];
-      setAddTocart(updatedCart);
-    } else if (addTocart[itemId] > 1) {
-      // Decrease quantity if more than one
-      setAddTocart((prevState) => ({
-        ...prevState,
-        [itemId]: prevState[itemId] - 1,
-      }));
-    }
+  const removeCart = async(itemId) => {
+    // console.log('fun rem called')
+  try {
+    const token= localStorage.getItem('food_token')
+    const payload={itemId}
+    await removeFromCart(payload, token)
+    setAddTocart((prevState) => ({
+      ...prevState,
+      [itemId]: (prevState[itemId] || 0) -1,
+  }));
+  } catch (error) {
+    console.error('Error adding to cart:', error.message);
+  }
   };
-// useEffect(()=>{
-//     console.log(addTocart)
-// },)
   return (
     <div className="flex flex-col mx-2 my-4 shadow-sm rounded-lg relative">
       <img
@@ -86,6 +84,7 @@ const Foodlist = ({ _id, name, image, price, description, category }) => {
 
       <p className="ms-4 mt-1">{description}</p>
       <p className="ms-4 text-gray-500 font-bold">{category}</p>
+      {/* <p>{_id}</p> */}
     </div>
   );
 };
