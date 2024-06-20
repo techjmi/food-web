@@ -9,6 +9,7 @@ import {
   HiDocumentText,
   HiOutlineUserGroup,
 } from "react-icons/hi";
+import { LuPackageOpen } from "react-icons/lu";
 import { Sidebar } from "flowbite-react";
 import { Link, useNavigate } from "react-router-dom";
 import { DataContext } from "../context/Dataprovider";
@@ -42,6 +43,11 @@ const DashboardSide = () => {
           <Link to='/dashboard?tab=food-list'>
             <Sidebar.Item icon={CiBoxList} as="div">
                 Food List
+            </Sidebar.Item>
+          </Link>
+          <Link to='/dashboard?tab=all-order'>
+            <Sidebar.Item icon={LuPackageOpen} as="div">
+                Order
             </Sidebar.Item>
           </Link>
           <Link to='/dashboard?tab=user-list'>

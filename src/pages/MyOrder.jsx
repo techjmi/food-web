@@ -9,9 +9,9 @@ const MyOrder = () => {
         const token = localStorage.getItem('food_token');
         try {
             const res = await getOrder(token);
-            console.log(res);
+            // console.log(res);
             if (res.data.data) {
-                console.log(res.data.data);
+                // console.log(res.data.data);
                 setData(res.data.data);
             }
         } catch (error) {
@@ -26,8 +26,8 @@ const MyOrder = () => {
     return (
         <div className='mb-2'>
             {data.map((order) => (
-                <div key={order.id} className='mb-2'>
-                    <OrderList items={order.items} order={order}/>
+                <div key={order._id} className='mb-2'>
+                    <OrderList items={order.items} order={order} fetchOrder={fetchOrder}/>
                 </div>
             ))}
         </div>

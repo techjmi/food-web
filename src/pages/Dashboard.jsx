@@ -6,6 +6,7 @@ import DashboardAdd from "../components/DashboardAdd";
 import DashboardOrder from "../components/DashboardOrder";
 import DashboardList from "../components/DashboardList";
 import DashboardSumm from "../components/DashboardSumm";
+import DashAllorders from "../components/DashAllorders";
 
 const Dashboard = () => {
   const [tab, setTab] = useState("");
@@ -30,6 +31,7 @@ const Dashboard = () => {
           {tab === "add-food" && <DashboardAdd />}
           {tab === "user-list" && <DashboardOrder />}
           {tab === "food-list" && <DashboardList />}
+          {tab === "all-order" && <DashAllorders />}
         </div>
       </div>
     </>

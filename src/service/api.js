@@ -21,7 +21,7 @@ try {
 export const getFood= async()=>{
     try {
         const res=await axios.get(`${urlfood}/foodlist`)
-        console.log(res)
+        // console.log(res)
         return res
     } catch (error) {
         console.log('The error While getting the food is', error.message)
@@ -73,7 +73,7 @@ export const LoginUser=async(data)=>{
                     Authorization: `Bearer ${token}`,
                 }
             })
-            console.log(res)
+            // console.log(res)
             return res
         } catch (error) {
             console.log('The error While adding to the cart', error.message)
@@ -88,7 +88,7 @@ export const LoginUser=async(data)=>{
                     Authorization: `Bearer ${token}`,
                 }
             })
-            console.log(res)
+            // console.log(res)
             return res
         } catch (error) {
             console.log('The error While adding to the cart', error.message)
@@ -102,7 +102,7 @@ export const LoginUser=async(data)=>{
                     Authorization:`Bearer ${token}`
                 }
             })
-            console.log(res)
+            // console.log(res)
             return res
             
         } catch (error) {
@@ -119,7 +119,7 @@ export const postOrder= async(data, token)=>{
                 Authorization:`Bearer ${token}`
             }
         })
-        console.log('the payment res', res)
+        // console.log('the payment res', res)
         return res
     } catch (error) {
         console.log('The error during making the payment is', error.message)
@@ -145,4 +145,23 @@ export const getOrder=async(token)=>{
     } catch (error) {
         console.log('The error While getting user order is', error.message)
     }
+}
+
+//get all order for admin panel
+export const getAllorder=async()=>{
+    try {
+        const res= await axios.get(`${PaymentUrl}/all-order`)
+        // console.log('order all', res)
+        return res
+    } catch (error) {
+        console.log('The error While getting all order order is', error.message)
+    }
+}
+//update the status of order for admin panel
+export const update=async(orderId,status)=>{
+try {
+    return await axios.put(`${PaymentUrl}/status`, {orderId, status})
+} catch (error) {
+    console.log('The error While updating the order is', error.message)
+}
 }

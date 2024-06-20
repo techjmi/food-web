@@ -7,6 +7,7 @@ import UserProfile from './UserProfile';
 import { BsCart3 } from "react-icons/bs";
 import { Badge} from '@mui/material';
 import { DataContext } from '../context/Dataprovider';
+const url="https://ideogram.ai/assets/progressive-image/balanced/response/SSAVgXfZS2mhcDMQXwo7ZA"
 const Header = () => {
   const location = useLocation();
   const path = location.pathname;
@@ -27,9 +28,10 @@ const handleSubmit=()=>{
         className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white"
       >
         <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white ">
-          Shamim
+        Tasty Twist Kitchen
         </span>
-        Blog
+        {/* <img src={url} alt='logo' width="60px" height="60px" className='rounded-full bg-slate-200'/> */}
+        {/* Blog */}
       </Link>
       <form onSubmit={handleSubmit}>
         <TextInput
