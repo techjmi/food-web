@@ -2,9 +2,11 @@ import axios from 'axios'
 const urlfood='https://food-backend-5zo6.onrender.com/api/food'
 const userURl="https://food-backend-5zo6.onrender.com/api/user"
 const cartUrl="https://food-backend-5zo6.onrender.com/api/cart"
+const PaymentUrl="https://food-backend-5zo6.onrender.com/api/order"
 // const urlfood='http://localhost:4000/api/food'
 // const userURl='http://localhost:4000/api/user'
 // const cartUrl='http://localhost:4000/api/cart'
+// const PaymentUrl='http://localhost:4000/api/order'
 //post food data code
 export const PostFood=async(data)=>{
 try {
@@ -107,3 +109,28 @@ export const LoginUser=async(data)=>{
             console.log('The error While getting the cart data is', error.message)
         }
     }
+
+    //payment api
+    
+export const postOrder= async(data, token)=>{
+    try {
+        const res= await axios.post(`${PaymentUrl}/place`,data,{
+            headers:{
+                Authorization:`Bearer ${token}`
+            }
+        })
+        console.log('the payment res', res)
+        return res
+    } catch (error) {
+        console.log('The error during making the payment is', error.message)
+    }
+}
+//verify order code
+export const PaymentVerify= async(success, orderId)=>{
+    try {
+        const res= await axios.post(`${PaymentUrl}/verify`,{success, orderId})
+        return res
+    } catch (error) {
+        console.log('The error during verifying the payment is', error.message)
+    }
+}

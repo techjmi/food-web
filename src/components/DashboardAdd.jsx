@@ -170,7 +170,7 @@ const DashboardAdd = () => {
           {/* Submit button */}
           <button
             type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded"
+            className="bg-blue-500 text-white px-4 py-2 rounded mb-4 md:mb-1"
           >
             Add Food
           </button>
