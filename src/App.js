@@ -9,6 +9,7 @@ import PlaceOrder from './components/PlaceOrder';
 import PrivateRoutes from './components/PrivateRoutes';
 import Dashboard from './pages/Dashboard';
 import Verify from './pages/Verify';
+import MyOrder from './pages/MyOrder';
 // import Home from './components/Home';
 // import Navbar from './components/Header.jsx';
 
@@ -21,6 +22,7 @@ function App() {
       <Route path='/cart'element={<Cart />} />
       <Route path='/placeorder'element={<PlaceOrder />} />
       <Route path='/verify'element={<Verify />} />
+      <Route path='/my-order'element={<MyOrder />} />
       <Route element={<PrivateRoutes />}>
     <Route path='/dashboard' element={<Dashboard />} />  
     </Route>

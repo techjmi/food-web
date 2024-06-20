@@ -25,10 +25,12 @@ const DashboardProfile = () => {
       </div>
       <div className="history ">
         <div className="order flex flex-row gap-3 justify-center w-full p-4">
-          <div className="ur_order flex flex-row shadow-sm-light bg-slate-50 rounded-lg px-2 py-2 items-center gap-3 font-medium w-1/2 outline cursor-pointer">
+          <Link to='/my-order' className="ur_order flex flex-row shadow-sm-light bg-slate-50 rounded-lg px-2 py-2 items-center gap-3 font-medium w-1/2 outline cursor-pointer">
+          {/* <div className=""> */}
             <BsBoxSeam className="size-8" />
             <span>Orders</span>
-          </div>
+          {/* </div> */}
+          </Link>
           <div className="wishlist flex flex-row shadow-sm-light bg-slate-50 rounded-lg px-2 py-2 items-center gap-3 font-medium w-1/2 outline cursor-pointer">
             <IoMdHeartEmpty className="size-8" />
             <p>Wishist</p>

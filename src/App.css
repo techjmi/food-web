@@ -11,4 +11,10 @@
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   margin-top: 24px;
 }
+.order_list {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr 2fr;
+  background-color: aquamarine;
+}
+
 

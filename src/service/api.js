@@ -1,12 +1,12 @@
 import axios from 'axios'
-const urlfood='https://food-backend-5zo6.onrender.com/api/food'
-const userURl="https://food-backend-5zo6.onrender.com/api/user"
-const cartUrl="https://food-backend-5zo6.onrender.com/api/cart"
-const PaymentUrl="https://food-backend-5zo6.onrender.com/api/order"
-// const urlfood='http://localhost:4000/api/food'
-// const userURl='http://localhost:4000/api/user'
-// const cartUrl='http://localhost:4000/api/cart'
-// const PaymentUrl='http://localhost:4000/api/order'
+// const urlfood='https://food-backend-5zo6.onrender.com/api/food'
+// const userURl="https://food-backend-5zo6.onrender.com/api/user"
+// const cartUrl="https://food-backend-5zo6.onrender.com/api/cart"
+// const PaymentUrl="https://food-backend-5zo6.onrender.com/api/order"
+const urlfood='http://localhost:4000/api/food'
+const userURl='http://localhost:4000/api/user'
+const cartUrl='http://localhost:4000/api/cart'
+const PaymentUrl='http://localhost:4000/api/order'
 //post food data code
 export const PostFood=async(data)=>{
 try {
@@ -132,5 +132,17 @@ export const PaymentVerify= async(success, orderId)=>{
         return res
     } catch (error) {
         console.log('The error during verifying the payment is', error.message)
+    }
+}
+//get order of products
+export const getOrder=async(token)=>{
+    try {
+        return await axios.get(`${PaymentUrl}/user-order`,{
+            headers:{
+                Authorization:`Bearer ${token}`
+            }
+        })
+    } catch (error) {
+        console.log('The error While getting user order is', error.message)
     }
 }
