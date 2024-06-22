@@ -1,3 +1,97 @@
+
+# Tasty Twist Kitchen
+
+Tasty Twist Kitchen is a full-featured food web application that allows users to browse a menu, filter food items, add items to their cart, and place orders using a dummy Stripe integration. Users can also view their order history. The application includes an admin panel where administrators can manage food items, view and update order statuses, and access detailed analytics about orders and users.
+
+## Features
+
+### User Features
+- **Filter Food by Menu**: Users can filter food items based on different categories.
+- **Add to Cart**: Users can add food items to their cart.
+- **View Cart**: Users can view the items in their cart.
+- **Place Orders**: Users can place orders using a dummy Stripe integration.
+- **Order History**: Users can view their order history.
+
+### Admin Features
+- **Add Food**: Admins can add new food items to the menu.
+- **View All Orders**: Admins can view all orders placed by users.
+- **Update Order Status**: Admins can update the status of any order.
+- **Analytics**: Admins can view total orders, last month's orders, total users, last month's users, and the top order-making users.
+
+### General Features
+- **Responsive Design**: The application is fully responsive, providing a seamless experience on both desktop and mobile devices.
+- **JWT Authentication**: The application uses JSON Web Tokens (JWT) for secure authentication.
+- **Middleware**: Custom middleware is used for various functionalities, including authentication and authorization.
+- **Tech Stack**: The application is built using the MERN (MongoDB, Express, React, Node.js) stack.
+- **Styling**: Tailwind CSS and Flowbite are used for styling and component libraries.
+- **Admin Dashboard**: The admin panel includes features for managing the application and viewing analytics.
+
+## Tech Stack
+- **Frontend**: React, Tailwind CSS, Flowbite
+- **Backend**: Node.js, Express
+- **Database**: MongoDB
+- **Authentication**: JWT
+- **Payments**: Stripe (dummy integration)
+
+## Deployment
+The application is deployed and can be accessed at: [Tasty Twist Kitchen](https://food-application-web-tios.onrender.com/)
+
+## Getting Started
+
+### Prerequisites
+- Node.js
+- MongoDB
+
+### Installation
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/techjmi/food-web
+   cd tasty-twist-kitchen
+   ```
+
+2. Install backend dependencies
+   ```bash
+   cd backend
+   npm install
+   ```
+
+3. Install frontend dependencies
+   ```bash
+   cd ../frontend
+   npm install
+   ```
+
+4. Create a `.env` file in the `backend` directory and add the following environment variables:
+   ```env
+   MONGO_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret
+   STRIPE_SECRET_KEY=your_stripe_secret_key
+   ```
+
+### Running the Application
+
+1. Start the backend server
+   ```bash
+   cd backend
+   npm start
+   ```
+
+2. Start the frontend development server
+   ```bash
+   cd ../frontend
+   npm start
+   ```
+
+3. Open your browser and navigate to `http://localhost:3000`
+
+## Usage
+
+- **User**: Sign up or log in to browse the menu, add items to the cart, and place orders.
+- **Admin**: Log in with admin credentials to access the admin panel, add new food items, view and update orders, and see detailed analytics.
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
