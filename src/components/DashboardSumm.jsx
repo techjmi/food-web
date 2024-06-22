@@ -31,12 +31,12 @@ const DashboardSumm = () => {
         <div className="bg-slate-100 shadow-sm w-full rounded-md p-4">
           <div className="total flex justify-between">
             <div className="left">
-              <p className="text-slate-700 font-semibold">TOTAL USER</p>
-              <p className="text-slate-700 font-semibold">{users.totalUsers}</p>
+              <p className="text-slate-700 md:font-semibold font-light">TOTAL USER</p>
+              <p className="text-slate-700 md:font-semibold font-light">{users.totalUsers}</p>
             </div>
             <div className="right">
               <div className="bg-slate-400 p-2 rounded-full">
-                <HiOutlineUserGroup className=" size-8" />
+                <HiOutlineUserGroup className=" md:size-8 size-4" />
               </div>
             </div>
           </div>
@@ -54,12 +54,12 @@ const DashboardSumm = () => {
         <div className="bg-slate-100 shadow-sm w-full rounded-md p-4">
           <div className="total flex justify-between">
             <div className="left">
-              <p className="text-slate-700 font-semibold">TOTAL ORDER</p>
-              <p className="text-slate-700 font-semibold">{orders.totalOrders}</p>
+              <p className="text-slate-700 md:font-semibold font-light">TOTAL ORDER</p>
+              <p className="text-slate-700 md:font-semibold font-light">{orders.totalOrders}</p>
             </div>
             <div className="right">
               <div className="bg-slate-400 p-2 rounded-full">
-                <BsBoxSeam className=" size-8" />
+                <BsBoxSeam className=" md:size-8 size-4" />
               </div>
             </div>
           </div>
