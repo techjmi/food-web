@@ -1,36 +1,24 @@
-
-import React, { useEffect, useState } from "react";
-import { getAllorder, update } from "../service/api";
+import React, { useContext } from "react";
 import { Select } from "flowbite-react";
-
+import { DataContext } from "../context/Dataprovider";
+import { update } from "../service/api";
 const DashAllorders = () => {
-  const [orders, setOrders] = useState([]);
-
-  const fetchAllOrders = async () => {
+  const { orders } = useContext(DataContext);
+  if (!orders) {
+    return <div className="text-center">Loading Cart...</div>;
+  }
+  if (!orders.data || !Array.isArray(orders.data)) {
+    return <div className="text-center">No orders found</div>;
+  }
+  const handleChange = async (e, orderId) => {
+    const status = e.target.value;
     try {
-      const res = await getAllorder();
-      if (res.data.success) {
-        setOrders(res.data.data);
-        console.log("Fetched orders:", res.data.data);
-      }
+      const res = await update(orderId, status);
+      console.log(res);
     } catch (error) {
-      console.error("Error fetching orders:", error);
+      console.log('The error while updating the status is', error.message);
     }
   };
-const handleChange=async(e,orderId)=>{
-    // orderId, status
-    const statue= e.target.value
-    // console.log(statue, orderId)
-    try {
-        const res = await update(orderId,statue)
-        // console.log(res)
-    } catch (error) {
-        console.log('the error while updating the status is', error.message)
-    }
-}
-  useEffect(() => {
-    fetchAllOrders();
-  }, []);
 
   return (
     <div className="overflow-x-auto">
@@ -45,7 +33,7 @@ const handleChange=async(e,orderId)=>{
           </tr>
         </thead>
         <tbody>
-          {orders.map((order) => (
+          {orders.data.map((order) => (
             <tr key={order._id} className="border-b border-gray-200 bg-slate-400">
               <td className="py-2 px-4">
                 {order.items.map((item, index) => (
@@ -63,10 +51,10 @@ const handleChange=async(e,orderId)=>{
                 {new Date(order.date).toLocaleDateString()}
               </td>
               <td>
-                <Select onChange={(e)=>handleChange(e,order._id)}>
-                    <option value="Food Processing">Food Processing</option>
-                    <option value="Out for Delivery">Out for Delivery</option>
-                    <option value="Deliverd">Deliverd</option>
+                <Select onChange={(e) => handleChange(e, order._id)}>
+                  <option value="Food Processing">Food Processing</option>
+                  <option value="Out for Delivery">Out for Delivery</option>
+                  <option value="Delivered">Delivered</option>
                 </Select>
               </td>
             </tr>

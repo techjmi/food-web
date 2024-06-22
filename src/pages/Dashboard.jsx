@@ -26,6 +26,7 @@ const Dashboard = () => {
         </div>
         {/* dashboard right part */}
         <div className="right w-full">
+          {/* <DashboardSumm /> */}
           {tab === "dash" && <DashboardSumm />}
           {tab === "profile" && <DashboardProfile />}
           {tab === "add-food" && <DashboardAdd />}

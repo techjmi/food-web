@@ -1,12 +1,12 @@
 import axios from 'axios'
-const urlfood='https://food-backend-5zo6.onrender.com/api/food'
-const userURl="https://food-backend-5zo6.onrender.com/api/user"
-const cartUrl="https://food-backend-5zo6.onrender.com/api/cart"
-const PaymentUrl="https://food-backend-5zo6.onrender.com/api/order"
-// const urlfood='http://localhost:4000/api/food'
-// const userURl='http://localhost:4000/api/user'
-// const cartUrl='http://localhost:4000/api/cart'
-// const PaymentUrl='http://localhost:4000/api/order'
+// const urlfood='https://food-backend-5zo6.onrender.com/api/food'
+// const userURl="https://food-backend-5zo6.onrender.com/api/user"
+// const cartUrl="https://food-backend-5zo6.onrender.com/api/cart"
+// const PaymentUrl="https://food-backend-5zo6.onrender.com/api/order"
+const urlfood='http://localhost:4000/api/food'
+const userURl='http://localhost:4000/api/user'
+const cartUrl='http://localhost:4000/api/cart'
+const PaymentUrl='http://localhost:4000/api/order'
 //post food data code
 export const PostFood=async(data)=>{
 try {
@@ -134,7 +134,7 @@ export const PaymentVerify= async(success, orderId)=>{
         console.log('The error during verifying the payment is', error.message)
     }
 }
-//get order of products
+//get order of user
 export const getOrder=async(token)=>{
     try {
         return await axios.get(`${PaymentUrl}/user-order`,{
@@ -148,11 +148,15 @@ export const getOrder=async(token)=>{
 }
 
 //get all order for admin panel
-export const getAllorder=async()=>{
+export const getAllorder=async(token)=>{
     try {
-        const res= await axios.get(`${PaymentUrl}/all-order`)
+        const res= await axios.get(`${PaymentUrl}/all-order`,{
+            headers:{
+                Authorization:`Bearer ${token}`
+            }
+        })
         // console.log('order all', res)
-        return res
+        return res.data
     } catch (error) {
         console.log('The error While getting all order order is', error.message)
     }
@@ -164,4 +168,34 @@ try {
 } catch (error) {
     console.log('The error While updating the order is', error.message)
 }
+}
+
+//get user data and last mon user for admin dashboard
+export const getAllUser= async(token)=>{
+    try {
+        const res= await axios.get(`${userURl}/getuser`,{
+            headers:{
+                Authorization:`Bearer ${token}`
+            }
+        })
+        console.log(res.data)
+        return res.data
+    } catch (error) {
+        console.log('The error While getting the all user is', error.message)
+    }
+}
+
+//top order api
+export const fetchTopOrder= async(token)=>{
+    try {
+        const res =await axios.get(`${PaymentUrl}/top-order`,{
+            headers:{
+                Authorization:`Bearer ${token}`
+            }
+        })
+        console.log('topodre', res)
+        return res.data
+    } catch (error) {
+        console.log('The error While getting the top order is', error.message)
+    }
 }

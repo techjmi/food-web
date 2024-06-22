@@ -1,5 +1,6 @@
 import React from "react";
-import bannerImage from "../assets/banner.jpg"; // Make sure the path is correct
+import bannerImage from "../assets/banner.jpg"; 
+import { Link } from "react-router-dom";
 import { Button } from "flowbite-react";
 const Banner = () => {
   return (
@@ -11,7 +12,6 @@ const Banner = () => {
         backgroundSize: "cover",
       }}
     >
-      {/* <div className="flex flex-col justify-between"> */}
         <div className="flex flex-col justify-center animate-pulse">
           <h1 className="text-white text-3xl font-bold text-center">
             Welcome to Our Site
@@ -23,11 +23,12 @@ const Banner = () => {
             dolores obcaecati?
           </p>
         </div>
+        <Link>
+        </Link>
         <div className="button text-center">
           <Button gradientDuoTone="purpleToPink">View Menu</Button>
         </div>
       </div>
-    // </div>
   );
 };
 

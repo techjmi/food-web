@@ -1,43 +1,41 @@
 import React, { useContext, useEffect } from "react";
-import {
-  AiFillPlusCircle,
-  AiFillMinusCircle,
-} from "react-icons/ai";
+import { AiFillPlusCircle, AiFillMinusCircle } from "react-icons/ai";
 import { DataContext } from "../context/Dataprovider";
 import { addInCart, removeFromCart } from "../service/api";
 
 const Foodlist = ({ _id, name, image, price, description, category }) => {
-  const { addTocart, setAddTocart } = useContext(DataContext);
-// console.log('food', _id)
+  const { addTocart, setAddTocart ,currentUser } = useContext(DataContext);
+  const isAdmin = currentUser && currentUser.isAdmin;
+  // console.log('food', _id)
   const addCart = async (itemId) => {
     // console.log('add called')
     try {
       // const token=
-        const token = localStorage.getItem('food_token')
-        const payload={itemId}
-        await addInCart(payload, token); // Update cart in database
-        setAddTocart((prevState) => ({
-            ...prevState,
-            [itemId]: (prevState[itemId] || 0) + 1,
-        }));
+      const token = localStorage.getItem("food_token");
+      const payload = { itemId };
+      await addInCart(payload, token); // Update cart in database
+      setAddTocart((prevState) => ({
+        ...prevState,
+        [itemId]: (prevState[itemId] || 0) + 1,
+      }));
     } catch (error) {
-        console.error('Error adding to cart:', error.message);
+      console.error("Error adding to cart:", error.message);
     }
-};
+  };
 
-  const removeCart = async(itemId) => {
+  const removeCart = async (itemId) => {
     // console.log('fun rem called')
-  try {
-    const token= localStorage.getItem('food_token')
-    const payload={itemId}
-    await removeFromCart(payload, token)
-    setAddTocart((prevState) => ({
-      ...prevState,
-      [itemId]: (prevState[itemId] || 0) -1,
-  }));
-  } catch (error) {
-    console.error('Error adding to cart:', error.message);
-  }
+    try {
+      const token = localStorage.getItem("food_token");
+      const payload = { itemId };
+      await removeFromCart(payload, token);
+      setAddTocart((prevState) => ({
+        ...prevState,
+        [itemId]: (prevState[itemId] || 0) - 1,
+      }));
+    } catch (error) {
+      console.error("Error adding to cart:", error.message);
+    }
   };
   return (
     <div className="flex flex-col mx-2 my-4 shadow-sm rounded-lg relative">
@@ -46,7 +44,8 @@ const Foodlist = ({ _id, name, image, price, description, category }) => {
         alt={name}
         className="object-cover rounded-lg cursor-pointer hover:scale-95 transition-transform duration-200"
       />
-      <div className="add absolute bottom-3 right-3">
+      {!isAdmin&&(
+        <div className="add absolute bottom-3 right-3">
         {!addTocart[_id] ? (
           <button
             className="text-black font-extrabold text-2xl m-0 p-0"
@@ -72,6 +71,8 @@ const Foodlist = ({ _id, name, image, price, description, category }) => {
           </div>
         )}
       </div>
+      )}
+      
       <div className="flex flex-row justify-between mt-3">
         <div className="">
           <h3 className="ms-4 font-bold">{name}</h3>

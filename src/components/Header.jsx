@@ -1,39 +1,41 @@
-
-import React, { useContext, useState } from 'react';
-import { Button, Navbar, TextInput } from 'flowbite-react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useContext, useState } from "react";
+import { Navbar, TextInput } from "flowbite-react";
+import { Link, useLocation } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
-import UserProfile from './UserProfile';
+import UserProfile from "./UserProfile";
 import { BsCart3 } from "react-icons/bs";
-import { Badge} from '@mui/material';
-import { DataContext } from '../context/Dataprovider';
-const url="https://ideogram.ai/assets/progressive-image/balanced/response/SSAVgXfZS2mhcDMQXwo7ZA"
+import { Badge } from "@mui/material";
+import { DataContext } from "../context/Dataprovider";
+const url =
+  "https://ideogram.ai/assets/image/lossless/response/Ts-4Pc2gRMGh2WYPgZtG1A";
 const Header = () => {
   const location = useLocation();
   const path = location.pathname;
-  const[searchTerm,setSearchTerm]=useState('')
-  const[login,setLogin]= useState(false)
-  const{addTocart}= useContext(DataContext)
+  const [searchTerm, setSearchTerm] = useState("");
+  const { addTocart, currentUser } = useContext(DataContext);
   const itemCount = Object.keys(addTocart).length;
-  // const itemCount=1
-//serach text function
-const handleSubmit=()=>{
-
-}
+  const isAdmin = currentUser && currentUser.isAdmin;
+  const handleSubmit = () => {
+    // Implement search functionality
+  };
+  if (!addTocart) {
+    return <div className="text-center">Loading Cart...</div>;
+  }
   return (
-    
-    <Navbar className="border-b-2 md:px-10 sticky top-0 z-10">
+    <Navbar className="border-b-2 md:px-10 sticky top-0 z-10 m-0 p-2">
       <Link
         to="/"
         className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white"
       >
-        <span className="px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white ">
-        Tasty Twist Kitchen
-        </span>
-        {/* <img src={url} alt='logo' width="60px" height="60px" className='rounded-full bg-slate-200'/> */}
-        {/* Blog */}
+        <img
+          src={url}
+          alt="logo"
+          width="70px"
+          height="60px"
+          className="rounded-full bg-slate-200"
+        />
       </Link>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="hidden lg:inline">
         <TextInput
           type="text"
           placeholder="Search..."
@@ -41,27 +43,17 @@ const handleSubmit=()=>{
           className="hidden lg:inline sm:hidden"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          size='small'
+          size="small"
         />
       </form>
-      {/* <Button className="w-12 h-10  hidden lg:inline" color="gray" pill>
-        <AiOutlineSearch />
-      </Button> */}
-      <Link to="/cart" className="cursor-pointer">
-      <Badge badgeContent={itemCount} color="secondary">
-        <BsCart3 className='size-8 sm:size-6 cursor-pointer' />
-      </Badge>
-    </Link>
-      
+      {currentUser && !currentUser.isAdmin && (
+        <Link to="/cart" className="cursor-pointer">
+          <Badge badgeContent={itemCount} color="secondary">
+            <BsCart3 className="size-8 sm:size-6 cursor-pointer" />
+          </Badge>
+        </Link>
+      )}
       <div className="flex gap-2 md:order-2">
-        {/* <Button
-          className="md:w-12 md:h-10 hidden lg:inline"
-          color="gray"
-          pill
-          onClick={() => dispatch(toggleTheme())}
-        >
-          {theme === "light" ? <MdOutlineLightMode /> : <MdDarkMode />}
-        </Button> */}
         <UserProfile />
         <Navbar.Toggle />
       </div>
@@ -75,9 +67,11 @@ const handleSubmit=()=>{
         <Navbar.Link active={path === "/projects"} as={"div"}>
           <Link to="/projects">Projects</Link>
         </Navbar.Link>
-        <Navbar.Link active={path === "/dashboard"} as={"div"}>
-          <Link to="/dashboard">Dashboard</Link>
-        </Navbar.Link>
+        {currentUser && isAdmin && (
+          <Navbar.Link active={path === "/dashboard?tab=dash"} as={"div"}>
+            <Link to="/dashboard">Dashboard</Link>
+          </Navbar.Link>
+        )}
       </Navbar.Collapse>
     </Navbar>
   );

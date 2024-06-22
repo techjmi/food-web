@@ -1,33 +1,38 @@
 import React, { createContext, useEffect, useState } from "react";
-import { food_list } from "../assets/assets";
-import { getCartData, getUserInfo } from "../service/api";
+import { getAllUser, getAllorder, getCartData, getUserInfo } from "../service/api";
 
 // Create the DataContext
 export const DataContext = createContext(null);
-
 const Dataprovider = ({ children }) => {
   const [food, setFood] = useState([]);
   const [addTocart, setAddTocart] = useState({});
   const [currentUser, setCurrentUser] = useState(null);
-  // const[getCart, setGetCart] =useState({})
-
+  const[loading, setloading]= useState(false)
+  const [users,setUsers]= useState([])
+  const[orders,setOrders]= useState({})
+  const token = localStorage.getItem("food_token");
   const fetchUser = async () => {
     try {
-      const token = localStorage.getItem("food_token");
-      // console.log(token);
+      setloading(true)
       if (token) {
         const userDetails = await getUserInfo(token);
-        // console.log(userDetails);
-        setCurrentUser(userDetails);
+        if (userDetails) { // Check if userDetails is not null or undefined
+          console.log(userDetails);
+          console.log(userDetails.isAdmin);
+          setCurrentUser(userDetails);
+          setloading(false)
+        } else {
+          console.log("No user details returned");
+        }
       }
     } catch (error) {
       console.log("Error fetching user info:", error.message);
     }
   };
+  
   //fecth cart data
   const fetchCart = async () => {
     try {
-      const token = localStorage.getItem('food_token');
       if (token) {
         const res = await getCartData(token);
         // console.log('res crat',res )
@@ -42,17 +47,48 @@ const Dataprovider = ({ children }) => {
       // Handle error (e.g., setAddTocart({}) or show error message)
     }
   };
-  
+  //const get user adata for admin
+  const getAdminuser= async()=>{
+    try {
+      setloading(true)
+      const res= await getAllUser(token)
+      if(res.success===true){
+        setUsers(res)
+        // console.log('...',res.users)
+        setloading(false)
+      }
+      // console.log('the admin user',users)
+    } catch (error) {
+      console.error('Error fetching user data:', error.message);
+      setloading(false)
+    }
+  }
+   //fecth the order of user to show in admin panel
+  const getOrder=async()=>{
+    try {
+      setloading(true)
+      const res= await getAllorder(token)
+      console.log('order res', res.data)
+      if(res.success===true){
+        setOrders(res)
+        setloading(false)
+      }
+    } catch (error) {
+      console.error('Error fetching order is:', error.message);
+      setloading(false)
+    }
+   }
+    
 
   useEffect(() => {
     const token=localStorage.getItem('food_token')
     if(token){
       fetchUser();
       fetchCart()
+      getAdminuser()
+      getOrder()
     }
   }, []);
- 
-  
   return (
     <DataContext.Provider
       value={{
@@ -62,7 +98,11 @@ const Dataprovider = ({ children }) => {
         setAddTocart,
         currentUser,
         setCurrentUser,
-        fetchUser
+        fetchUser,
+        users,
+        setUsers,
+        loading,
+        orders,setOrders
       }}
     >
       {children}
