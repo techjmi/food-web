@@ -55,8 +55,8 @@ const Header = () => {
       )}
       <div className="flex gap-2 md:order-2">
         <UserProfile />
-        <Navbar.Toggle />
       </div>
+      <Navbar.Toggle />
       <Navbar.Collapse>
         <Navbar.Link active={path === "/"} as={"div"}>
           <Link to="/">Home</Link>

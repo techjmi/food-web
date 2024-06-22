@@ -12,13 +12,14 @@ const Dataprovider = ({ children }) => {
   const[orders,setOrders]= useState({})
   const token = localStorage.getItem("food_token");
   const fetchUser = async () => {
+    const token = localStorage.getItem("food_token");
     try {
       setloading(true)
       if (token) {
         const userDetails = await getUserInfo(token);
         if (userDetails) { // Check if userDetails is not null or undefined
-          console.log(userDetails);
-          console.log(userDetails.isAdmin);
+          // console.log(userDetails);
+          // console.log(userDetails.isAdmin);
           setCurrentUser(userDetails);
           setloading(false)
         } else {
@@ -32,6 +33,7 @@ const Dataprovider = ({ children }) => {
   
   //fecth cart data
   const fetchCart = async () => {
+    const token = localStorage.getItem("food_token")
     try {
       if (token) {
         const res = await getCartData(token);
@@ -68,7 +70,7 @@ const Dataprovider = ({ children }) => {
     try {
       setloading(true)
       const res= await getAllorder(token)
-      console.log('order res', res.data)
+      // console.log('order res', res.data)
       if(res.success===true){
         setOrders(res)
         setloading(false)
@@ -78,7 +80,7 @@ const Dataprovider = ({ children }) => {
       setloading(false)
     }
    }
-    
+
 
   useEffect(() => {
     const token=localStorage.getItem('food_token')
@@ -88,6 +90,7 @@ const Dataprovider = ({ children }) => {
       getAdminuser()
       getOrder()
     }
+  
   }, []);
   return (
     <DataContext.Provider

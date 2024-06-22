@@ -11,7 +11,8 @@ const DisplayFood = ({ category }) => {
     try {
       setLoading(true)
       const res= await getFood()
-      setFood(res.data)
+      console.log('res fodd', res)
+      setFood(res.foods)
       setLoading(false)
     } catch (error) {
       console.log('the error while getting food is', error.message)

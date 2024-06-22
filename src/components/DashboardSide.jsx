@@ -29,11 +29,14 @@ const DashboardSide = () => {
     <Sidebar className="w-full md:w-56">
       <Sidebar.Items>
         <Sidebar.ItemGroup className=" flex flex-col gap-3">
-          <Link to="/dashboard?tab=dash">
-            <Sidebar.Item icon={MdDashboard} as="div">
-              Dashbaord
-            </Sidebar.Item>
-          </Link>
+          {isAdmin && (
+            <Link to="/dashboard?tab=dash">
+              <Sidebar.Item icon={MdDashboard} as="div">
+                Dashbaord
+              </Sidebar.Item>
+            </Link>
+          )}
+
           {isAdmin && (
             <Link to="/dashboard?tab=add-food">
               <Sidebar.Item icon={IoMdAdd} as="div">
@@ -68,11 +71,12 @@ const DashboardSide = () => {
               </Sidebar.Item>
             </Link>
           )} */}
-          <Link onClick={handleLogout}>
-            <Sidebar.Item icon={HiArrowSmRight} as="div">
-              Sign Out
-            </Sidebar.Item>
-          </Link>
+         
+         <Sidebar.Item icon={HiArrowSmRight} as="div">
+      <Link to="/" onClick={handleLogout}>
+        Sign Out
+      </Link>
+    </Sidebar.Item>
         </Sidebar.ItemGroup>
       </Sidebar.Items>
     </Sidebar>

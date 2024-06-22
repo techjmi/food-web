@@ -33,33 +33,33 @@ const Login = ({ onClose, onCancel }) => {
       [name]: value,
     });
   };
-  //handle submit
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setErrormsg(""); 
-  
+
     try {
       const res = await LoginUser(formData);
-      console.log(res);
-    localStorage.setItem("food_token", res.data.token);
-      if (res.status === 200) {
-        // localStorage.setItem("food_token", res.data.token);
+      // console.log("Login response:", res);
+      // localStorage.setItem("food_token", res.data.token);
+      if (res.success === true) {
+        localStorage.setItem("food_token", res.token);
         await fetchUser();
+        console.log("User fetched successfully");
         navigate("/");
+        setLoading(false);
       } else {
-        setErrormsg(res.data.message||"Login failed");
-        setLoading(false)
+        setErrormsg(res.data.message || "Login failed");
+        setLoading(false);
       }
     } catch (error) {
       console.log("Error while logging in:", error.message);
-      // setErrormsg("An error occurred. Please try again."); 
+      setErrormsg("An error occurred. Please try again."); 
       setLoading(false);
     }
   };
-  
-  
+
   return (
     <div className="inset-0 flex items-center justify-center bg-opacity-50 z-40 fixed">
       <div className="w-[95%] max-w-md bg-white pb-8 pt-2 rounded-lg shadow dark:border md:mt-0 xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -89,7 +89,7 @@ const Login = ({ onClose, onCancel }) => {
                     placeholder="name@company.com"
                     required
                     onChange={handleChange}
-                    value={formData.email} // Bind value to formData.email
+                    value={formData.email}
                   />
                 </div>
                 <div>
@@ -107,7 +107,7 @@ const Login = ({ onClose, onCancel }) => {
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
                     onChange={handleChange}
-                    value={formData.password} // Bind value to formData.password
+                    value={formData.password}
                   />
                 </div>
                 {errorMsg && (

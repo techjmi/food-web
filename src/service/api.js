@@ -7,7 +7,7 @@ const PaymentUrl="https://food-backend-5zo6.onrender.com/api/order"
 // const userURl='http://localhost:4000/api/user'
 // const cartUrl='http://localhost:4000/api/cart'
 // const PaymentUrl='http://localhost:4000/api/order'
-//post food data code
+// post food data code
 export const PostFood=async(data)=>{
 try {
     const response= axios.post(`${urlfood}/addfood`,data)
@@ -22,7 +22,7 @@ export const getFood= async()=>{
     try {
         const res=await axios.get(`${urlfood}/foodlist`)
         // console.log(res)
-        return res
+        return res.data
     } catch (error) {
         console.log('The error While getting the food is', error.message)
     }
@@ -30,7 +30,7 @@ export const getFood= async()=>{
 //user signup code
 export const Signup=async(data)=>{
     try {
-        const response= axios.post(`${userURl}/signup`,data)
+        const response= await axios.post(`${userURl}/signup`,data)
         return response
     } catch (error) {
         console.log('The error While Signup is', error.message)
@@ -40,8 +40,8 @@ export const Signup=async(data)=>{
 //user login code
 export const LoginUser=async(data)=>{
     try {
-        const response= axios.post(`${userURl}/login`,data)
-        return response
+        const response= await axios.post(`${userURl}/login`,data)
+        return response.data
         
     } catch (error) {
         console.log('The error While posting the food is', error.message)
@@ -178,7 +178,7 @@ export const getAllUser= async(token)=>{
                 Authorization:`Bearer ${token}`
             }
         })
-        console.log(res.data)
+        // console.log(res.data)
         return res.data
     } catch (error) {
         console.log('The error While getting the all user is', error.message)
@@ -188,12 +188,14 @@ export const getAllUser= async(token)=>{
 //top order api
 export const fetchTopOrder= async(token)=>{
     try {
-        const res =await axios.get(`${PaymentUrl}/top-order`,{
-            headers:{
-                Authorization:`Bearer ${token}`
+        const res =await axios.get(`${PaymentUrl}/top-order`
+            ,{
+                headers:{
+                    Authorization:`Bearer ${token}`
+                }
             }
-        })
-        console.log('topodre', res)
+        )
+        // console.log('topodre', res)
         return res.data
     } catch (error) {
         console.log('The error While getting the top order is', error.message)
